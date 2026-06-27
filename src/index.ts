@@ -15,9 +15,11 @@ import { aiRouter } from './routes/ai.js';
 const app = express();
 
 app.use(helmet());
+// `*` (or empty) means reflect any origin; otherwise allow only the listed origins.
+const allowAllOrigins = env.corsOrigin.length === 0 || env.corsOrigin.includes('*');
 app.use(
   cors({
-    origin: env.corsOrigin.length ? env.corsOrigin : true,
+    origin: allowAllOrigins ? true : env.corsOrigin,
     credentials: true,
   }),
 );
