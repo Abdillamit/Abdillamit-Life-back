@@ -45,3 +45,13 @@ profileRouter.patch(
     res.json({ data });
   }),
 );
+
+// DELETE /api/profile — permanently delete the account and all data
+profileRouter.delete(
+  '/',
+  asyncHandler<AuthedRequest>(async (req, res) => {
+    const { error } = await supabaseAdmin.auth.admin.deleteUser(req.userId!);
+    if (error) throw new HttpError(500, error.message);
+    res.status(204).end();
+  }),
+);
