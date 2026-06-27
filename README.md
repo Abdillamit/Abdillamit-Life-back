@@ -56,3 +56,20 @@ The token is validated against Supabase; the resolved user id scopes all queries
 - `npm run build` — compile to `dist/`
 - `npm start` — run compiled server
 - `npm run typecheck` — type-check only
+
+## Deploy (Render)
+
+This repo ships a `render.yaml` Blueprint.
+
+1. Render Dashboard → **New → Blueprint** → connect this GitHub repo.
+2. Render reads `render.yaml`:
+   - build: `npm install --include=dev && npm run build`
+   - start: `npm start`
+   - health check: `/health`
+3. Set the `sync: false` env vars in the dashboard:
+   - `CORS_ORIGIN` → your Vercel URL (e.g. `https://abdillamit-life-web.vercel.app`)
+   - `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
+   - `ANTHROPIC_API_KEY` (optional, for AI endpoints)
+4. Deploy. The public URL becomes `NEXT_PUBLIC_API_URL` for the web app.
+
+> The server binds to `process.env.PORT` (Render injects it).

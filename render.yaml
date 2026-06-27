@@ -1,0 +1,30 @@
+# Render Blueprint for Abdillamit Life backend API.
+# Deploy: Render Dashboard → New → Blueprint → pick this repo.
+services:
+  - type: web
+    name: abdillamit-life-back
+    runtime: node
+    plan: free
+    region: singapore
+    branch: main
+    # Install devDeps too (Render sets NODE_ENV=production, which would skip them)
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CORS_ORIGIN
+        sync: false # set to your Vercel URL, e.g. https://abdillamit-life-web.vercel.app
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-opus-4-8
