@@ -53,6 +53,24 @@ export interface Tag {
   created_at: string;
 }
 
+export type BookStatus = 'want_to_read' | 'reading' | 'read';
+
+export interface Book {
+  id: string;
+  user_id: string;
+  title: string;
+  author: string | null;
+  status: BookStatus;
+  rating: number | null;
+  notes: string | null;
+  cover_url: string | null;
+  started_at: string | null;
+  finished_at: string | null;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Goal {
   id: string;
   user_id: string;
