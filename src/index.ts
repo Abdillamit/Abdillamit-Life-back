@@ -11,6 +11,7 @@ import { timelineRouter } from './routes/timeline.js';
 import { profileRouter } from './routes/profile.js';
 import { analyticsRouter } from './routes/analytics.js';
 import { aiRouter } from './routes/ai.js';
+import { tagsRouter } from './routes/tags.js';
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/api/timeline', timelineRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/analytics', analyticsRouter);
 app.use('/api/ai', aiRouter);
+app.use('/api/tags', tagsRouter);
 
 app.use(notFound);
 app.use(errorHandler);
